@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/Navbar";
 import ClientOnly from "./components/ClientOnly";
 import Modal from "./components/modals/Modal";
 import RegisterModal from "./components/modals/RegisterModal";
+import ToasterProvider from "./components/providers/ToasterProvider";
 
 const nunito = Nunito({
   subsets: ["latin"], // Specify the subset if needed
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${nunito.variable} antialiased`}>
         <ClientOnly>
+          <ToasterProvider />
           {/* <Modal isOpen={true} title="Hello World" actionLabel="Submit"/> */}
           <RegisterModal />
         <Navbar />
