@@ -1,16 +1,22 @@
+// app/layout.tsx
+
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google"; // Import Nunito from Google Fonts
+import { Nunito } from "next/font/google"; 
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
 import ClientOnly from "./components/ClientOnly";
 import Modal from "./components/modals/Modal";
 import RegisterModal from "./components/modals/RegisterModal";
 import ToasterProvider from "./components/providers/ToasterProvider";
+import LoginModal from "./components/modals/LoginModal";
+import getCurrentUser from "./actions/getCurrentUser";
+import { getServerSession } from "next-auth"; // Import the getServerSession
+import SessionProviderWrapper from "./components/SessionProviderWrapper"; // Import the wrapper
 
 const nunito = Nunito({
-  subsets: ["latin"], // Specify the subset if needed
-  weight: [ "200", "300", "400", "500", "600", "700", "800", "900"], // List each weight explicitly
-  variable: "--font-nunito", // Define a custom CSS variable
+  subsets: ["latin"], 
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"], 
+  variable: "--font-nunito", 
 });
 
 export const metadata: Metadata = {
@@ -18,22 +24,26 @@ export const metadata: Metadata = {
   description: "Airbnb clone",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession(); // Get the session
+  const currentUser = await getCurrentUser(); // Get current user data
+
   return (
     <html lang="en">
       <body className={`${nunito.variable} antialiased`}>
         <ClientOnly>
-          <ToasterProvider />
-          {/* <Modal isOpen={true} title="Hello World" actionLabel="Submit"/> */}
-          <RegisterModal />
-        <Navbar />
+          <SessionProviderWrapper session={session}> {/* Wrap children with SessionProvider */}
+            <ToasterProvider />
+            <LoginModal />
+            <RegisterModal />
+            <Navbar currentUser={currentUser} />
+            {children} {/* Render children here */}
+          </SessionProviderWrapper>
         </ClientOnly>
-        
-        {children}
       </body>
     </html>
   );
