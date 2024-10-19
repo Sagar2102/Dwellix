@@ -45,7 +45,7 @@ const CategoryBox: FC<CategoryBoxProps> = ({ icon: Icon, label, selected }) => {
 
     return (
         <div
-            // onClick={handleClick}
+            onClick={handleClick}
             className={`
           flex 
           flex-col 
