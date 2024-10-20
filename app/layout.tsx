@@ -13,6 +13,7 @@ import getCurrentUser from "./actions/getCurrentUser";
 import { getServerSession } from "next-auth"; // Import the getServerSession
 import SessionProviderWrapper from "./components/SessionProviderWrapper"; // Import the wrapper
 import RentModal from "./components/modals/RentModal";
+import SearchModal from "./components/modals/SearchModal";
 
 const nunito = Nunito({
   subsets: ["latin"], 
@@ -39,6 +40,7 @@ export default async function RootLayout({
         <ClientOnly>
           <SessionProviderWrapper session={session}> {/* Wrap children with SessionProvider */}
             <ToasterProvider />
+            <SearchModal />
             <RentModal />
             <LoginModal />
             <RegisterModal />
