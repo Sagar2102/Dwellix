@@ -7,3 +7,10 @@ body,
 :root {
   height: 100%; /* Removed the extra colon */
 }
+
+.leaflet-botttom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+  z-index: 0 !important;
+}

@@ -7,6 +7,7 @@ import MenuItem from './MenuItem';
 import useRegisterModal from '../../hooks/useRegisterModal';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import { signOut, useSession } from 'next-auth/react';
+import useRentModal from '@/app/hooks/useRentModal';
 
 const UserMenu: React.FC = () => {
     const { data: session } = useSession(); // Get session data
@@ -15,17 +16,26 @@ const UserMenu: React.FC = () => {
 
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
+    const rentModal = useRentModal();
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = useCallback(() => {
         setIsOpen((value) => !value);
     }, []);
 
+    const onRent = useCallback(() => {
+        if (!currentUser) {
+            return loginModal.onOpen();
+        }
+
+        rentModal.onOpen();
+    }, [currentUser, loginModal,rentModal])
+
     return (
         <div className='relative'>
             <div className='flex flex-items items-center gap-3'>
                 <div
-                    onClick={() => {}}
+                    onClick={onRent}
                     className='hidden md:block text-sm font-semibold py-3 rounded-full hover-bg-neutral-100 transition cursor-pointer'>
                     Dwellix your home
                 </div>
@@ -47,7 +57,7 @@ const UserMenu: React.FC = () => {
                                 <MenuItem onClick={() => {}} label="My favorites" />
                                 <MenuItem onClick={() => {}} label="My reservations" />
                                 <MenuItem onClick={() => {}} label="My properties" />
-                                <MenuItem onClick={() => {}} label="Dwellix my home" />
+                                <MenuItem onClick={rentModal.onOpen} label="Dwellix my home" />
                                 <hr />
                                 <MenuItem onClick={() => signOut()} label="Logout" />
                             </>
