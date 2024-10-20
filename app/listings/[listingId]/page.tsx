@@ -1,13 +1,16 @@
+// ListingPage.tsx
+
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import getListingById from '@/app/actions/getListingById';
+import getReservations from '@/app/actions/getReservations';
 import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
 import React from 'react';
 import ListingClient from './ListingClient';
-import { SafeListing } from '@/app/types'; // Adjust import based on your structure
+import { SafeListing, SafeReservation } from '@/app/types';
 
 export const metadata = {
-    title: 'Airbnb | Listings',
+    title: 'Dwellix | Listings',
 };
 
 interface IParams {
@@ -17,6 +20,7 @@ interface IParams {
 const ListingPage = async ({ params }: { params: IParams }) => {
     // Fetch the listing data
     const listingData = await getListingById(params);
+    const reservations: SafeReservation[] = await getReservations(params); // Make sure to type this correctly
     const currentUser = await getCurrentUser();
 
     // Check if listing exists
@@ -28,24 +32,14 @@ const ListingPage = async ({ params }: { params: IParams }) => {
         );
     }
 
-    // Convert date strings to Date objects
-    const listing: SafeListing = {
-        ...listingData,
-        createdAt: new Date(listingData.createdAt), // Convert createdAt to Date
-        user: {
-            ...listingData.user,
-            createdAt: new Date(listingData.user.createdAt), // Convert user's createdAt
-            updatedAt: new Date(listingData.user.updatedAt), // Convert user's updatedAt
-            // If there are other date fields, convert them similarly
-            emailVerified: listingData.user.emailVerified ? new Date(listingData.user.emailVerified) : null,
-        },
-        // Add any other properties from listingData that are needed
-    };
+    // listingData should be of type SafeListing
+    const listing: SafeListing = listingData; 
 
     return (
         <ClientOnly>
             <ListingClient
-                listing={listing} // Use the converted listing here
+                listing={listing} // Use the SafeListing directly
+                reservations={reservations}
                 currentUser={currentUser}
             />
         </ClientOnly>
