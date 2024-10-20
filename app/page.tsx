@@ -1,47 +1,48 @@
-import Image from "next/image";
 import ClientOnly from "./components/ClientOnly";
-import  Container  from "./components/Container";
+import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
 import getListings from "./actions/getListings";
 import getCurrentUser from "./actions/getCurrentUser";
 import ListingCard from "./components/listings/ListingCard";
+import { SafeListing } from "./types"; // Make sure to import your types
 
 export default async function Home() {
-  const listings = await getListings();
+    const listings = await getListings(); // Should return listings with user included
     const currentUser = await getCurrentUser();
 
-    if (listings.length === 0) {
+    // Convert date strings to Date objects and include user details
+    const convertedListings: SafeListing[] = listings.map(listing => ({
+        ...listing,
+        createdAt: new Date(listing.createdAt), // Convert createdAt to Date
+        user: {
+            ...listing.user,
+            createdAt: new Date(listing.user.createdAt),
+            updatedAt: new Date(listing.user.updatedAt),
+            emailVerified: listing.user.emailVerified ? new Date(listing.user.emailVerified) : null,
+        },
+    }));
+
+    if (convertedListings.length === 0) {
         return (
             <ClientOnly>
                 <EmptyState showReset />
             </ClientOnly>
-        )
+        );
     }
 
-  return (
-    <ClientOnly>
-        <Container>
-            <div className='pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8'>
-                {/* {listings.map((listing) => {
-                    return (
+    return (
+        <ClientOnly>
+            <Container>
+                <div className='pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8'>
+                    {convertedListings.map((listing) => (
                         <ListingCard
                             currentUser={currentUser}
                             key={listing.id}
-                            data={listing}
+                            data={listing} // Ensure this is a SafeListing
                         />
-                    )
-                })} */}
-                {listings.map((listing) => {
-                        return (
-                            <ListingCard
-                                currentUser={currentUser}
-                                key={listing.id}
-                                data={listing}
-                            />
-                        )
-                    })}
-            </div>
-        </Container>
-    </ClientOnly>
-)
+                    ))}
+                </div>
+            </Container>
+        </ClientOnly>
+    );
 }
