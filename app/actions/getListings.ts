@@ -1,9 +1,29 @@
 import prisma from "@/app/libs/prismadb";
 import { SafeListing } from "@/app/types"; // Adjust the import path as needed
 
-export default async function getListings() {
+export interface IListingsParams {
+    userId?: string;
+    // guestCount?: number;
+    // roomCount?: number;
+    // bathroomCount?: number;
+    // startDate?: string;
+    // endDate?: string;
+    // locationValue?: string;
+    // category?: string;
+}
+
+export default async function getListings(
+    params: IListingsParams
+) {
     try {
+        const {userId}=params;
+        let query: any={};
+        if(userId)
+        {
+            query.userId=userId;
+        }
         const listings = await prisma.listing.findMany({
+            where:query,
             include: {
                 user: true, // Include the user data
             },

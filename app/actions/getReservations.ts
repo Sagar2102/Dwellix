@@ -6,6 +6,7 @@ import { SafeReservation, SafeListing, SafeUser } from '@/app/types'; // Ensure 
 interface IParams {
     listingId?: string;
     userId?: string; // If needed
+    authorId?: string;
 }
 
 export default async function getReservations(params: IParams): Promise<SafeReservation[]> {
