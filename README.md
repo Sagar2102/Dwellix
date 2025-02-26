@@ -33,19 +33,24 @@ Dwellix is a full-stack **MERN** application that serves as an **Airbnb clone** 
 - **Login Page** 
 ![Login Page](https://res.cloudinary.com/dkk2rer7z/image/upload/v1740573906/samples/Screenshot_2025-02-26_180500_bhna8f.png)
 
+
 - **Home Page** 
 ![Home Page](https://res.cloudinary.com/dkk2rer7z/image/upload/v1740573906/samples/Screenshot_2025-02-26_180500_bhna8f.png)
 
+
 - **Create Listing** 
 ![Create Listing](https://res.cloudinary.com/dkk2rer7z/image/upload/v1740573939/samples/Screenshot_2025-02-26_180634_zm6i2a.png)
+
 
 - **Listing Detail** 
 ![Listing Detail](https://res.cloudinary.com/dkk2rer7z/image/upload/v1740573958/samples/Screenshot_2025-02-26_180710_gsobrb.png)
 ![](https://res.cloudinary.com/dkk2rer7z/image/upload/v1740573958/samples/Screenshot_2025-02-26_180728_hk7iym.png)
 ![](https://res.cloudinary.com/dkk2rer7z/image/upload/v1740573958/samples/Screenshot_2025-02-26_180744_bpo3rh.png)
 
+
 - **My-Trips Page** 
 ![My-Trips Page](https://res.cloudinary.com/dkk2rer7z/image/upload/v1740573939/samples/Screenshot_2025-02-26_180611_xkoxdt.png)
+
 
 - **My-Properties Page** 
 ![My-Properties Page](https://res.cloudinary.com/dkk2rer7z/image/upload/v1740573939/samples/Screenshot_2025-02-26_180611_xkoxdt.png)
