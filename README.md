@@ -1,6 +1,6 @@
 # Dwellix
 
-Dwellix is a full-stack **MERN** application that serves as an **Airbnb clone** for hotel and property booking. It provides users with an intuitive interface to browse, book, and manage rental properties.
+Dwellix is a full-stack **MERN** application that serves for hotel and property booking. It provides users with an intuitive interface to browse, book, and manage rental properties.
 
 ## Features
 
