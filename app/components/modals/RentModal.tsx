@@ -273,7 +273,7 @@ const RentModal = () => {
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
-      title="Airbnb your home!"
+      title="Dwellix your home!"
       body={bodyContent}
     />
   )

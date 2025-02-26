@@ -23,7 +23,7 @@ const nunito = Nunito({
 
 export const metadata: Metadata = {
   title: "Dwellix",
-  description: "Airbnb clone",
+  description: "Dwellix",
 };
 
 export default async function RootLayout({
