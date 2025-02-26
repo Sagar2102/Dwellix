@@ -32,7 +32,7 @@ Dwellix is a full-stack **MERN** application that serves as an **Airbnb clone** 
 
 ## Screenshots
 
-![Screenshot Description](https://res-console.cloudinary.com/dkk2rer7z/thumbnails/v1/image/upload/v1740573906/c2FtcGxlcy9TY3JlZW5zaG90XzIwMjUtMDItMjZfMTgwNTAwX2JobmE4Zg==/drilldown)
+![](https://res.cloudinary.com/dkk2rer7z/image/upload/v1740573906/samples/Screenshot_2025-02-26_180500_bhna8f.png)
 
 ## Installation
 
